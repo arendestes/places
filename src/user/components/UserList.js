@@ -7,14 +7,14 @@ const UserList = props => {
     if ( props.items.length === 0 ){
         return <h2>No users at found.</h2>
     }
-
-    return <ul>
+    
+    return <ul className='user-list'>
         { props.items.map( user => <UserItem 
         key={user.id} 
         id={user.id} 
         name={user.name} 
         image={user.image} 
-        NuberPlaces={user.places} /> ) }
+        numberPlaces={user.places} /> ) }
     </ul>
 }
 
