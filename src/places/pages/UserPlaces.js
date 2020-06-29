@@ -11,8 +11,8 @@ const USER_DUMMY_PLACES = [
         creator: 'u1',
         address: '100 Swamp Britches Ln',
         location: {
-            lat: 30.4413992,
-            lng: -91.2515038
+            lat: 30.4457497, 
+            lng: -91.1871759
         },
         image: 'https://images.unsplash.com/photo-1520542099817-0d19524eccca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
     }, 
@@ -23,8 +23,8 @@ const USER_DUMMY_PLACES = [
         creator: 'u2',
         address: '100 Swamp Britches Ln',
         location: {
-            lat: 30.4413992,
-            lng: -91.2515038
+            lat: 30.4457497, 
+            lng: -91.1871759
         },
         image: 'https://images.unsplash.com/photo-1520542099817-0d19524eccca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
     }
