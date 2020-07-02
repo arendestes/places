@@ -8,11 +8,11 @@ import './NewPlace.css';
 
 
 const formReducer = (state, action) => {
-    switch (action.type){
+    switch (action.type) {
         case 'INPUT_CHANGE':
             let formIsValid = true;
-            for(const inputID in state.inputs){
-                if(inputID === action.inputID){
+            for (const inputID in state.inputs) {
+                if (inputID === action.inputID) {
                     formIsValid = formIsValid && action.isValid;
                 } else {
                     formIsValid = formIsValid && state.inputs[inputID].isValid;
@@ -59,7 +59,12 @@ const NewPlace = () => {
         })
     }, []);
 
-    return <form className='place-form'>
+    const placeSubmitHandler = event => {
+        event.preventDefault();
+        console.log(formState.inputs); //send this to the back end once that is running
+    };
+
+    return <form className='place-form' onSubmit={placeSubmitHandler}>
         <Input
             id='title'
             type='text'
@@ -75,6 +80,14 @@ const NewPlace = () => {
             element='input'
             validators={[VALIDATOR_MINLENGTH(5)]}
             errorText='Please enter a valid description.'
+            onInput={inputHandler} />
+        <Input
+            id='address'
+            type='text'
+            label='Address'
+            element='input'
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText='Please enter a valid address.'
             onInput={inputHandler} />
         <Button type='submit' disabled={!formState.isValid}>ADD PLACE</Button>
     </form>
