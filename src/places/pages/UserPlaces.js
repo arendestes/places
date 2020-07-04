@@ -17,7 +17,7 @@ const USER_DUMMY_PLACES = [
         image: 'https://images.unsplash.com/photo-1520542099817-0d19524eccca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
     }, 
     {
-        id: 'p1',
+        id: 'p2',
         title: 'Ricky Roys Gator Farm and Petting Zoo',
         description: 'Great place to wrestle a gator, pet a gator, ride a gator... pretty much anything goes.',
         creator: 'u2',
@@ -28,7 +28,7 @@ const USER_DUMMY_PLACES = [
         },
         image: 'https://images.unsplash.com/photo-1520542099817-0d19524eccca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
     }
-]
+];
 
 const UserPlaces = props => {
 
