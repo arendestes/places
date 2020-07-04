@@ -39,14 +39,13 @@ const UpdatePlace = props => {
     };
 
     const placeID = useParams().placeID;
-    const placeIdentifier = USER_DUMMY_PLACES.find(place => place.id = placeID)
+    const placeIdentifier = USER_DUMMY_PLACES.find(place => place.id === placeID)
 
     if (!placeIdentifier) {
         return <div className="center">
             <h2>Could not find place.</h2>
         </div>
     }
-
 
 
     return <form onSubmit={submitHandler}>
@@ -57,6 +56,8 @@ const UpdatePlace = props => {
             validators={[VALIDATOR_REQUIRE()]}
             errorText="Please enter a valid title." 
             onInput={() => {}}
+            value={placeIdentifier.title}
+            valid={true}
             />
         <Input
             id='description'
@@ -65,8 +66,10 @@ const UpdatePlace = props => {
             validators={[VALIDATOR_MINLENGTH(5)]}
             errorText='Please enter a valid description.' 
             onInput={() => {}}
+            value={placeIdentifier.description}
+            valid={true}
             />
-        <Button type='submit' />
+        <Button type='submit' disabled>Update Place</Button>
     </form>
 }
 
