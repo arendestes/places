@@ -59,7 +59,7 @@ const UpdatePlace = props => {
             errorText="Please enter a valid title." 
             onInput={() => {}}
             value={placeIdentifier.title}
-            valid={true}
+            isValid={true}
             />
         <Input
             id='description'
@@ -69,7 +69,7 @@ const UpdatePlace = props => {
             errorText='Please enter a valid description.' 
             onInput={() => {}}
             value={placeIdentifier.description}
-            valid={true}
+            isValid={true}
             />
         <Button type='submit' disabled>Update Place</Button>
     </form>
