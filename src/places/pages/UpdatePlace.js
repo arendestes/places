@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Input from "../../shared/components/FormElements/Input";
@@ -36,24 +36,40 @@ const USER_DUMMY_PLACES = [
 ];
 
 const UpdatePlace = props => {
-
-
-
     const placeID = useParams().placeID;
-    const placeIdentifier = USER_DUMMY_PLACES.find(place => place.id === placeID)
+    const [loading, setLoading] = useState(true);
 
-    const [formState, inputHandler] = useForm(
+    const [formState, inputHandler, setFormData] = useForm(
         {
             title: {
-                value: placeIdentifier.title,
-                isValid: true
+                value: '',
+                isValid: false
             },
             description: {
-                value: placeIdentifier.description,
-                isValid: true
+                value: '',
+                isValid: false
             }
-        }, true
+        }, false
     )
+
+    const placeIdentifier = USER_DUMMY_PLACES.find(place => place.id === placeID);
+
+    useEffect(() => {
+        setFormData(
+            {
+                title: {
+                    value: placeIdentifier.title,
+                    isValid: true
+                },
+                description: {
+                    value: placeIdentifier.description,
+                    isValid: true
+                }
+            }, true
+        )
+        setLoading(false);
+    }, [placeIdentifier, setFormData])
+
 
 
 
@@ -62,12 +78,15 @@ const UpdatePlace = props => {
             <h2>Could not find place.</h2>
         </div>
     }
-    
+
     const updatePlaceSubmitHandler = event => {
         event.preventDefault();
         console.log(formState.inputs);
     };
 
+    if(loading){
+        return <div className="center"><h2>Loading ....</h2></div>
+    }
 
     return <form className='place-form' onSubmit={updatePlaceSubmitHandler}>
         <Input
@@ -75,21 +94,21 @@ const UpdatePlace = props => {
             type='text'
             label="Change Title"
             validators={[VALIDATOR_REQUIRE()]}
-            errorText="Please enter a valid title." 
+            errorText="Please enter a valid title."
             onInput={inputHandler}
             initialValue={formState.inputs.title.value}
             initialIsValid={formState.inputs.title.isValid}
-            />
+        />
         <Input
             id='description'
             type='textarea'
             label="Change Description"
             validators={[VALIDATOR_MINLENGTH(5)]}
-            errorText='Please enter a valid description.' 
+            errorText='Please enter a valid description.'
             onInput={inputHandler}
             initialValue={formState.inputs.description.value}
             initialIsValid={formState.inputs.description.isValid}
-            />
+        />
         <Button type='submit' disabled={!formState.isValid}>Update Place</Button>
     </form>
 }
