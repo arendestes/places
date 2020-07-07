@@ -33,14 +33,14 @@ const Input = props => {
         }
     )
 
-    const {onInput, id} = props;
-    const {isValid, value} = inputState;
+    const { onInput, id } = props;
+    const { isValid, value } = inputState;
 
     useEffect(() => {
         onInput(id, value, isValid);
-    },[onInput, isValid, id, value])
+    }, [onInput, isValid, id, value])
 
-    const changeHandler = event => { 
+    const changeHandler = event => {
         dispatch(
             {
                 type: 'CHANGE',
@@ -56,21 +56,23 @@ const Input = props => {
         })
     }
 
-    const element = props.type === 'text' ? (
-        <input 
-        id={props.id}
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={changeHandler}
-        onBlur={touchHandler}
-        value={inputState.value} />
-    ) : (
-            <textarea 
-            id={props.id} 
-            rows={props.rows || 3} 
-            onChange={changeHandler}
-            onBlur={touchHandler}
-            value={inputState.value} />
+    const element = props.type === 'textarea' ?
+        (
+            <textarea
+                id={props.id}
+                rows={props.rows || 3}
+                onChange={changeHandler}
+                onBlur={touchHandler}
+                value={inputState.value} />
+        ) :
+        (
+            <input
+                id={props.id}
+                type={props.type}
+                placeholder={props.placeholder}
+                onChange={changeHandler}
+                onBlur={touchHandler}
+                value={inputState.value} />
         )
     return <div className={`form-control ${!inputState.isValid && inputState.isTouched && 'form-control--invalid'}`}>
         <label htmlFor={props.id}>{props.label}</label>
