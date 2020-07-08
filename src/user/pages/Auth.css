@@ -13,3 +13,7 @@
 .authentication form {
     margin-bottom: 1rem;
 }
+
+.authentication h3 {
+    font-size: .8em;
+}
