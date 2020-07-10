@@ -26,7 +26,13 @@ function App() {
     }, [],
   )
 
-  return <AuthContext.Provider>
+  return <AuthContext.Provider
+  value={{
+    isLoggedIn: isLoggedIn,
+    login: login,
+    logout: logout
+  }}
+  >
     <Router>
       <MainNavigation />
       <main>
