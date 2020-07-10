@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, { useState, useCallback} from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import Users from './user/pages/Users';
@@ -12,6 +12,7 @@ import { AuthContext } from './shared/context/auth-context';
 
 function App() {
 
+ 
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   const login = useCallback(
@@ -26,34 +27,54 @@ function App() {
     }, [],
   )
 
+
+  let routes;
+
+  if (isLoggedIn) {
+    routes = (
+      <Switch>
+        <Route path='/' exact>
+          <Users />
+        </Route>
+        <Route path='/:userID/places' exact>
+          <UserPlaces />
+        </Route>
+        <Route path='/places/new' exact>
+          <NewPlace />
+        </Route>
+        <Route path='/place/:placeID'>
+          <UpdatePlace />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path='/' exact>
+          <Users />
+        </Route>
+        <Route path='/:userID/places' exact>
+          <UserPlaces />
+        </Route>
+        <Route path='/auth'>
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </Switch>
+    );
+  }
   return <AuthContext.Provider
-  value={{
-    isLoggedIn: isLoggedIn,
-    login: login,
-    logout: logout
-  }}
+    value={{
+      isLoggedIn: isLoggedIn,
+      login: login,
+      logout: logout
+    }}
   >
     <Router>
       <MainNavigation />
       <main>
-        <Switch>
-          <Route path='/' exact>
-            <Users />
-          </Route>
-          <Route path='/:userID/places' exact>
-            <UserPlaces />
-          </Route>
-          <Route path='/places/new' exact>
-            <NewPlace />
-          </Route>
-          <Route path='/place/:placeID'>
-            <UpdatePlace />
-          </Route>
-          <Route path='/auth'>
-            <Auth />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
+        {routes}
       </main>
     </Router>
   </AuthContext.Provider>
